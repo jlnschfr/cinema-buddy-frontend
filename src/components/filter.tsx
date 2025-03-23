@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchGenres, Genre, GenreResponse } from "../services/genreService";
+import { fetchGenres } from "../services/genreService";
+import type { Genre, GenreResponse } from "../types/genre";
 
 interface FilterProps {
   onSubmit: (selectedGenre: Genre | undefined, year: string) => void;

@@ -1,20 +1,15 @@
 "use client";
 
 import Card from "../components/card";
-
-interface CardType {
-  title: string;
-  release_date: string;
-  imageSrc: string;
-}
+import type { Movie } from "../types/movie";
 
 interface CardsProps {
-  cards?: CardType[];
+  cards?: Movie[];
 }
 
 export default function Cards({ cards = [] }: CardsProps) {
   const cardElements = cards.map((card) => (
-    <Card key={card.title} title={card.title} releaseDate={card.release_date} imageSrc={card.imageSrc} />
+    <Card key={card.title} title={card.title} releaseDate={card.releaseDate} imageSrc={card.imageSrc} />
   ));
 
   return (

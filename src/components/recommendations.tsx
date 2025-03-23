@@ -3,17 +3,12 @@
 import { useState } from "react";
 import Filter from "../components/filter";
 import Cards from "../components/cards";
-import type { Genre } from "../services/genreService";
 import { fetchMovies } from "../services/recommendationsService";
-
-interface CardType {
-  title: string;
-  release_date: string;
-  imageSrc: string;
-}
+import type { Genre } from "../types/genre";
+import type { Movie } from "../types/movie";
 
 export default function Recommendations() {
-  const [cards, setCards] = useState<CardType[]>([]);
+  const [cards, setCards] = useState<Movie[]>([]);
 
   const loadMovies = async (selectedGenre: Genre | undefined, year: string) => {
     try {
@@ -21,10 +16,9 @@ export default function Recommendations() {
 
       setCards(() => {
         return data.movies.map((movie) => {
-          console.log(movie.imageSrc);
           return {
             title: movie.title,
-            release_date: movie.releaseDate,
+            releaseDate: movie.releaseDate,
             imageSrc: movie.imageSrc
           };
         });
@@ -35,7 +29,6 @@ export default function Recommendations() {
   };
 
   const handleSubmit = (selectedGenre: Genre | undefined, year: string) => {
-    console.log("clicked");
     if (selectedGenre && year) {
       loadMovies(selectedGenre, year);
     } else {
