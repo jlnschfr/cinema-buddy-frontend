@@ -20,6 +20,7 @@ export default function Recommendations() {
             title: movie.title,
             releaseDate: movie.releaseDate,
             imageSrc: movie.imageSrc,
+            vote: movie.vote,
           };
         });
       });

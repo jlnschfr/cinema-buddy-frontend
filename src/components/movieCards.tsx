@@ -9,7 +9,7 @@ interface MovieCardsProps {
 
 export default function MovieCards({ movies = [] }: MovieCardsProps) {
   const movieCards = movies.map((movie) => (
-    <MovieCard key={movie.title} title={movie.title} releaseDate={movie.releaseDate} imageSrc={movie.imageSrc} />
+    <MovieCard key={movie.title} title={movie.title} releaseDate={movie.releaseDate} imageSrc={movie.imageSrc} vote={movie.vote} />
   ));
 
   return (
