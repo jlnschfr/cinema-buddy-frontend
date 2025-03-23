@@ -2,24 +2,24 @@
 
 import { useState } from "react";
 import Filter from "../components/filter";
-import Cards from "../components/cards";
+import MovieCards from "./movieCards";
 import { fetchMovies } from "../services/recommendationsService";
 import type { Genre } from "../types/genre";
 import type { Movie } from "../types/movie";
 
 export default function Recommendations() {
-  const [cards, setCards] = useState<Movie[]>([]);
+  const [movieCards, setMovieCards] = useState<Movie[]>([]);
 
-  const loadMovies = async (selectedGenre: Genre | undefined, year: string) => {
+  const loadMovies = async (selectedGenre: Genre, selectedYear: string) => {
     try {
-      const data = await fetchMovies(selectedGenre?.id || "", year);
+      const data = await fetchMovies(selectedGenre.id, selectedYear);
 
-      setCards(() => {
+      setMovieCards(() => {
         return data.movies.map((movie) => {
           return {
             title: movie.title,
             releaseDate: movie.releaseDate,
-            imageSrc: movie.imageSrc
+            imageSrc: movie.imageSrc,
           };
         });
       });
@@ -28,18 +28,14 @@ export default function Recommendations() {
     }
   };
 
-  const handleSubmit = (selectedGenre: Genre | undefined, year: string) => {
-    if (selectedGenre && year) {
-      loadMovies(selectedGenre, year);
-    } else {
-      console.log("No genre or year selected");
-    }
+  const handleSubmit = (selectedGenre: Genre, selectedYear: string) => {
+    loadMovies(selectedGenre, selectedYear);
   };
 
   return (
     <>
       <Filter onSubmit={handleSubmit} />
-      <Cards cards={cards} />
+      <MovieCards movies={movieCards} />
     </>
   );
 }

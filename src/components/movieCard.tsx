@@ -1,7 +1,14 @@
 "use client";
+
 import Image from "next/image";
 
-export default function Card({ title, releaseDate, imageSrc }: { title: string; releaseDate: string, imageSrc: string }) {
+interface MovieCardProps {
+  title: string;
+  releaseDate: string;
+  imageSrc: string;
+}
+
+export default function MovieCard({ title, releaseDate, imageSrc }: MovieCardProps) {
   return (
     <div className="card bg-base-100 shadow-sm">
       <Image
